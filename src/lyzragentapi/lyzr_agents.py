@@ -1,10 +1,24 @@
 import requests
 import json
+import os
 import streamlit as st
+from lyzr import Summarizer
+from dotenv import load_dotenv
+
+load_dotenv()
+
+agent_api_url = os.getenv('AGENT_API_URL')
+provider = os.getenv('LLM_CONFIG_PROVIDER')
+model = os.getenv('LLM_CONFIG_MODEL')
+temperature = os.getenv('LLM_CONFIG_TEMPERATURE')
+top_p = os.getenv('LLM_CONFIG_TOP_P')
+env_url = os.getenv('AGENT_ENVIRONEMNT_URL')
+agent_url = os.getenv('CREATE_AGENT_URL')
+chat_url = os.getenv('AGENT_CHAT_URL')
 
 class LyzrAgentConfig:
     def __init__(self, x_api_key, llm_api_key):
-        self.url = "https://agent.api.lyzr.app/v2/"
+        self.url = agent_api_url
         self.headers = {
             "accept": "application/json",
             "x-api-key": x_api_key
@@ -17,16 +31,16 @@ class LyzrAgentConfig:
             "features": features,
             "tools": tools,
             "llm_config": {
-                            "provider": "openai",
-                            "model": "gpt-4o-mini",
+                            "provider": provider,
+                            "model": model,
                             "config": {
-                                "temperature": 0.5,
-                                "top_p": 0.9
+                                "temperature": temperature,
+                                "top_p": top_p
                             },
             "llm_api_key": self.llm_api_key
         }})
 
-        url = self.url + "environment"
+        url = env_url
 
         response = requests.post(url, headers=self.headers, data=payload)
 
@@ -46,7 +60,7 @@ class LyzrAgentConfig:
             "agent_description": ""
         })
 
-        url = self.url + "agent"
+        url = agent_url
 
         response = requests.post(url, headers=self.headers, data=payload)
 
@@ -64,7 +78,7 @@ class LyzrAgentConfig:
             "message": message
         })
 
-        url = self.url + "chat/"
+        url = chat_url
 
         response = requests.post(url, headers=self.headers, data=payload)
 
@@ -90,3 +104,9 @@ class LyzrAgentConfig:
         else:
             st.error(f"Error: {response.status_code} - {response.text}")
             return None
+        
+
+def data_summarizer(llm_api_key, data, instruction='Summary'):
+    summarizer_object = Summarizer(api_key=llm_api_key)
+    summary = summarizer_object.summarize(text=data, instructions=instruction)
+    return summary

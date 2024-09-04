@@ -37,7 +37,7 @@ def home_page_feature():
         user_education = st.text_input(label="Enter your Education")
         user_current_job = st.text_input(label="Enter your current job title")
         skills_experience = st.text_area(label="Write about your skills/experiemce", 
-                                         placeholder="Skills and experience (input as bullet points or text)", 
+                                         placeholder="Skills and experience (input as comma seperated values)", 
                                          height=100)
 
     desired_job_role = st.text_input(label='Desired Job Role')
@@ -46,7 +46,7 @@ def home_page_feature():
 
     if (user_name and user_location and career_goals and 
         user_education and user_current_job and skills_experience and 
-        desired_job_role and resume_file) is not None:
+        desired_job_role and resume_file):
 
         col3, col4 = st.columns(2)
 

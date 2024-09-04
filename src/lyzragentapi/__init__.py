@@ -1,3 +1,3 @@
-from .lyzr_agents import LyzrAgentConfig
+from .lyzr_agents import LyzrAgentConfig, data_summarizer
 
-__all__ = ['LyzrAgentConfig']
+__all__ = ['LyzrAgentConfig', 'data_summarizer']

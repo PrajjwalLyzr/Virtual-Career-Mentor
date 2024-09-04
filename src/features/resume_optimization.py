@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import time
 import PyPDF2
 from agents import resume_optimization_agent
 from utils import (file_checker,
@@ -11,10 +12,10 @@ def resume_optimization_feature(OPENAI_API_KEY, LYZR_X_KEY):
     st.title('Resume Optimization')
     st.markdown("##### Optimize your resume")
 
-    resume_file = file_checker(directoryName="ResumeData")
-    if len(resume_file)>0:
-        with st.spinner('Optimizing the Resume'):
-            # if st.button('Optimize Resume'):
+    data_file = file_checker(directoryName="DataFile")
+    if len(data_file)>0:
+        if st.button('Optimize Resume'):
+            with st.spinner('Optimizing the Resume'):            
                 resume_pdf_content = ""
                 file_name = get_file_name(directory="ResumeData")
                 file_path = os.path.join("ResumeData", file_name)
