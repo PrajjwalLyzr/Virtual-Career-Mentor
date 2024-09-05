@@ -1,7 +1,7 @@
 import streamlit as st
 import os
 import json
-import PyPDF2
+import pypdf
 from serpapi import GoogleSearch
 from agents import job_search_agent
 from lyzragentapi import data_summarizer
@@ -53,7 +53,7 @@ def job_search_assistance(OPENAI_API_KEY, LYZR_X_KEY, SERP_API_KEY):
                         file_path = os.path.join("ResumeData", file_name)
 
                         with open(file_path, 'rb') as file:
-                            pdf_reader = PyPDF2.PdfReader(file)
+                            pdf_reader = pypdf.PdfReader(file)
                             for page in range(len(pdf_reader.pages)):
                                 resume_pdf_content += pdf_reader.pages[page].extract_text()
 

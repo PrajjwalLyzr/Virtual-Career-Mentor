@@ -162,3 +162,5 @@ cython_debug/
 test/
 Keys.txt
 link.py
+/testdata
+test.py

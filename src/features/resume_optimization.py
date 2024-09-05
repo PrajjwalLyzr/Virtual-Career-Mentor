@@ -1,7 +1,6 @@
 import streamlit as st
 import os
-import time
-import PyPDF2
+import pypdf
 from agents import resume_optimization_agent
 from utils import (file_checker,
                    get_file_name,
@@ -21,7 +20,7 @@ def resume_optimization_feature(OPENAI_API_KEY, LYZR_X_KEY):
                 file_path = os.path.join("ResumeData", file_name)
 
                 with open(file_path, 'rb') as file:
-                    pdf_reader = PyPDF2.PdfReader(file)
+                    pdf_reader = pypdf.PdfReader(file)
                     for page in range(len(pdf_reader.pages)):
                         resume_pdf_content += pdf_reader.pages[page].extract_text()
 
