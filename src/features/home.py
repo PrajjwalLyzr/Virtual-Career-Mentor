@@ -2,17 +2,12 @@ import streamlit as st
 import os
 from PIL import Image
 from utils import (remove_existing_files,
-                   save_uploaded_file,
-                   delete_data_file)
-
+                   save_uploaded_file)
 
 def home_page_feature():
     resume_file_dir = "ResumeData"
     os.makedirs(resume_file_dir, exist_ok=True)
     remove_existing_files(directory=resume_file_dir)
-
-    # data_file_path = "data_file.txt"
-    # delete_data_file(file_path=data_file_path)
 
     data_file_dir = 'DataFile'
     os.makedirs(data_file_dir, exist_ok=True)

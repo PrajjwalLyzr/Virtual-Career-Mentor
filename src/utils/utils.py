@@ -56,12 +56,6 @@ def get_file_name(directory):
         return f"An error occurred: {e}"
 
 
-
-def delete_data_file(file_path):
-    if os.path.exists(file_path):
-        os.remove(file_path)
-
-
 def file_checker(directoryName):
     file = []
     for filename in os.listdir(directoryName):

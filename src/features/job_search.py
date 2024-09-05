@@ -78,7 +78,7 @@ def job_search_assistance(OPENAI_API_KEY, LYZR_X_KEY, SERP_API_KEY):
                                     st.subheader(job["title"])
                                     st.write(f"**Company:** {job['company_name']}")
                                     st.write(f"**Description:** {job['description']}")
-                                    st.write(f"**Qualifications:** {job['qualifications']}")
+                                    st.write(f"**Qualifications:** {job['qualifications']['items']}")
                                     st.subheader(f"[Apply Here]({job['apply_link']})")
                                     st.markdown("---")
 
